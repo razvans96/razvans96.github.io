@@ -1,0 +1,59 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-row>
+    <ion-col size-md="6" offset-md="3">
+      <div class="form-box">
+        <form class="form" [formGroup]="songForm" (ngSubmit)="addSong()">
+          <span class="title">Add new song</span>
+          <span class="subtitle">Fill this form to add a new custom song</span>
+          <ion-item>
+            <ion-input
+              class="input"
+              placeholder="Title"
+              type="text"
+              formControlName="title"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="input"
+              placeholder="Artist"
+              type="text"
+              formControlName="artist"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              class="input"
+              type="date"
+              placeholder="dd/mm/yyyy"
+              formControlName="date"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input
+              *ngIf="isPhotoEmpty()"
+              class="input"
+              placeholder="Photo URL"
+              type="text"
+              formControlName="photo">
+            </ion-input>
+            <ion-button slot="end" fill="clear" (click)="takePhoto()">
+              <ion-icon name="camera"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <span color="success" *ngIf="!isPhotoEmpty()"
+            >Se ha tomado la foto correctamente</span
+          >
+          <ion-button type="submit" [disabled]="!songForm.valid"
+            >Submit</ion-button
+          >
+        </form>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
